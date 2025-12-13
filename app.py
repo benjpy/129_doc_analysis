@@ -17,13 +17,21 @@ st.set_page_config(
 # Custom CSS for modern styling
 st.markdown("""
 <style>
-    /* Force light mode styles if not default (though Streamlit defaults to system/light) */
+    /* Force light mode styles */
     .stApp {
         background-color: #ffffff;
         color: #333333;
     }
+
+    /* Force Sidebar Light */
+    [data-testid="stSidebar"] {
+        background-color: #f8f9fa !important;
+    }
+    [data-testid="stSidebar"] * {
+        color: #333333 !important;
+    }
     
-    /* Modern button styling */
+    /* Modern button styling (Analyze) */
     div.stButton > button {
         background-color: #4CAF50;
         color: white;
@@ -39,6 +47,24 @@ st.markdown("""
         background-color: #45a049;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         transform: translateY(-2px);
+    }
+    div.stButton > button:active {
+        color: white !important;
+    }
+
+    /* Download Buttons - Make them light/neutral */
+    div.stDownloadButton > button {
+        background-color: #f1f3f4 !important;
+        color: #333333 !important;
+        border: 1px solid #dadce0 !important;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 16px; 
+    }
+    div.stDownloadButton > button:hover {
+        background-color: #e8eaed !important;
+        color: #333333 !important;
+        border-color: #dadce0 !important;
     }
 
     /* Card-like containers */
@@ -57,12 +83,34 @@ st.markdown("""
         color: #2c3e50;
     }
     
-    /* File uploader styling tweaks */
-    .stFileUploader {
-        padding: 1rem;
-        border: 2px dashed #e0e0e0;
-        border-radius: 10px;
-        background-color: #fafafa;
+    /* File uploader styling tweaks - Force Light */
+    [data-testid='stFileUploader'] {
+        width: 100%;
+    }
+    [data-testid='stFileUploader'] section {
+        background-color: #f8f9fa !important;
+        border: 2px dashed #e0e0e0 !important;
+        color: #333333 !important;
+    }
+    /* The dropzone text */
+    [data-testid='stFileUploader'] section > div {
+        color: #333333 !important;
+    }
+    /* The browse button inside uploader */
+    [data-testid='stFileUploader'] section button {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+        border: 1px solid #ccc !important;
+    }
+    /* Uploaded file item */
+    [data-testid='stFileUploader'] ul li {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+    }
+    
+    /* Output Code Blocks - Light theme */
+    .stCodeBlock {
+        background-color: #f8f9fa !important;
     }
     
     /* Ensure inputs have light background */
@@ -175,7 +223,7 @@ def display_cost_stats(usage_metadata):
         st.write(f"**Total Tokens:** {total_count:,}")
         st.caption(f"Input: {prompt_count:,} | Output: {candidates_count:,}")
         st.write(f"**Est. Cost:** ${total_cost:.6f}")
-        st.caption("Based on Gemini 1.5 Flash pricing")
+        st.caption("Based on Gemini 2.5 Flash pricing")
         st.divider()
 
 # Main Content Area
