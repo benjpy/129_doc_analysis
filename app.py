@@ -90,13 +90,12 @@ st.markdown("""
     [data-testid='stFileUploader'] section {
         background-color: #f8f9fa !important;
         border: 2px dashed #e0e0e0 !important;
+    }
+    /* Force ALL text inside the uploader to be dark */
+    [data-testid='stFileUploader'] * {
         color: #333333 !important;
     }
-    /* The dropzone text */
-    [data-testid='stFileUploader'] section > div {
-        color: #333333 !important;
-    }
-    /* The browse button inside uploader */
+    /* The browse button inside uploader - ensure good contrast */
     [data-testid='stFileUploader'] section button {
         background-color: #ffffff !important;
         color: #333333 !important;
@@ -106,6 +105,10 @@ st.markdown("""
     [data-testid='stFileUploader'] ul li {
         background-color: #ffffff !important;
         color: #333333 !important;
+    }
+    /* Remove SVG fill if it's white */
+    [data-testid='stFileUploader'] svg {
+        fill: #333333 !important;
     }
     
     /* Output Code Blocks - Light theme */
