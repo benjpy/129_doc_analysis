@@ -1,0 +1,4 @@
+Company name: [Company name]
+[ ] Positive margins
+[ ] Negative margins
+[ ] Sales over $100M

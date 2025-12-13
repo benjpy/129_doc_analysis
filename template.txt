@@ -1,0 +1,3 @@
+Company name: [Company name]
+Total sales for the quarter: [Total sales for the quarter]
+Net margin: [Net margin]
