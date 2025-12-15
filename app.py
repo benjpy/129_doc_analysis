@@ -190,17 +190,34 @@ with st.sidebar:
     st.markdown("Configure your analysis session.")
     
     # API Key Handling
+    # Try to load from secrets/env
     if "GOOGLE_API_KEY" in st.secrets:
-        env_api_key = st.secrets["GOOGLE_API_KEY"]
+        system_api_key = st.secrets["GOOGLE_API_KEY"]
     else:
-        env_api_key = os.getenv("GOOGLE_API_KEY")
+        system_api_key = os.getenv("GOOGLE_API_KEY")
 
-    api_key = st.text_input(
-        "Google API Key", 
-        value=env_api_key if env_api_key else "",
-        type="password",
-        help="Your Gemini API Key. Loaded from secrets or .env if available."
-    )
+    # API Key Status Indicator
+    if system_api_key:
+        st.success("✅ System API Key loaded")
+    else:
+        st.warning("⚠️ No System API Key found")
+
+    # Advanced Settings for manual override
+    with st.expander("Advanced: Override API Key"):
+        user_api_key = st.text_input(
+            "Enter Google API Key", 
+            value="", 
+            type="password",
+            help="Enter your API Key if you wish to override the system key.",
+            key="google_api_key_input_v2" 
+        )
+
+    if user_api_key:
+        api_key = user_api_key
+    elif system_api_key:
+        api_key = system_api_key
+    else:
+        api_key = None
     
     st.divider()
     
