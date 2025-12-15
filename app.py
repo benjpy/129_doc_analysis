@@ -190,12 +190,16 @@ with st.sidebar:
     st.markdown("Configure your analysis session.")
     
     # API Key Handling
-    env_api_key = os.getenv("GOOGLE_API_KEY")
+    if "GOOGLE_API_KEY" in st.secrets:
+        env_api_key = st.secrets["GOOGLE_API_KEY"]
+    else:
+        env_api_key = os.getenv("GOOGLE_API_KEY")
+
     api_key = st.text_input(
         "Google API Key", 
         value=env_api_key if env_api_key else "",
         type="password",
-        help="Your Gemini API Key. Loaded from .env if available."
+        help="Your Gemini API Key. Loaded from secrets or .env if available."
     )
     
     st.divider()
